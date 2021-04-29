@@ -1,0 +1,2 @@
+CREATE EXTENSION postgis;
+CREATE TABLE spatio (ae character varying, container character varying, latitude character varying, longitude character varying, altitude character varying, velocity character varying, direction character varying, time timestamp without time zone, gps geometry, CONSTRAINT overicheck PRIMARY KEY (id, container, time));

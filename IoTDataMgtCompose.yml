@@ -1,0 +1,49 @@
+version: '2'
+services:
+  classifier:
+    container_name: classifier
+    image: seol0keti/ubuntu:2
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+
+  postgres:
+    image: postgis/postgis
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=spatiodata
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=keti123
+    expose: 
+      - "5432"
+    ports:
+      - 5432:5432
+    volumes:
+      - /docker/postgres/data:/var/lib/postgresql/data
+
+  influxdb:
+    image: influxdb:1.8
+    container_name: influx
+    restart: always
+    environment:
+      - INFLUXDB_DB=dbclass
+    expose: 
+      - "8086"
+    ports:
+      - 8086:8086
+    volumes:
+      - /docker/influx/data:/var/lib/influx/data
+
+  APIserver:
+    container_name: APIserver
+    image: seol0keti/node-producer:1
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    expose: 
+      - "7979"
+    ports:
+      - 7979:7979
+    volumes:
+      - /docker/api-server/data:/var/lib/api-server/data
