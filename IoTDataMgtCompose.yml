@@ -37,7 +37,7 @@ services:
 
   APIserver:
     container_name: APIserver
-    image: seol0keti/node-producer:1
+    image: seol0keti/ubuntu:2
     command: /bin/bash
     stdin_open: true
     tty: true
