@@ -1,8 +1,9 @@
 version: '2'
 services:
   classifier:
-    container_name: classifier
     image: seol0keti/ubuntu:1.1
+    container_name: classifier
+    restart: always
     command: /bin/bash
     stdin_open: true
     tty: true
@@ -36,8 +37,9 @@ services:
       - /docker/influx/data:/var/lib/influx/data
 
   APIserver:
-    container_name: APIserver
     image: seol0keti/ubuntu:1.1
+    container_name: APIserver
+    restart: always
     command: /bin/bash
     stdin_open: true
     tty: true

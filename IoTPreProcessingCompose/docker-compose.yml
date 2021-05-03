@@ -1,13 +1,13 @@
 version: '2'
 services:
   zookeeper:
-    container_name: zookeeper
     image: wurstmeister/zookeeper:3.4.6
+    container_name: zookeeper
     ports:
      - "2181:2181"
   kafka:
-    container_name: kafka
     image: wurstmeister/kafka:2.13-2.6.0
+    container_name: kafka
     depends_on:
       - zookeeper
     ports:
@@ -25,8 +25,8 @@ services:
       - ./var/run/docker.sock:/var/run/docker.sock
 
   receiver:
-    container_name: receiver
     image: seol0keti/ubuntu:1.1
+    container_name: receiver
     command: /bin/bash
     stdin_open: true
     tty: true
@@ -36,15 +36,17 @@ services:
       - "7980"
 
   preprocessor:
-    container_name: preprocessor
     image: seol0keti/ubuntu:1.1
+    container_name: preprocessor
+    restart: always
     command: /bin/bash
     stdin_open: true
     tty: true
     
   redis:
-    container_name: redis
     image: redis:6.2
+    container_name: redis
+    restart: always
     expose: 
       - "6379"
 
